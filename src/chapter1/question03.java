@@ -3,30 +3,23 @@ package chapter1;
 /**
  * Created by yuta on 2017/06/29.
  */
+
+/*
+問3:Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics.""
+        "という文を単語に分解し，各単語の（アルファベットの）文字数を先頭から出現順に並べたリストを作成せよ
+*/
+
 public class question03 {
     public static void main(String[] args) {
-        String str ="Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can.";
-        str.replace(".","");
-        String[] strlist = str.split(" ");
-        String[] numlist ={"1","5","6","7","8","9","15","16","19"};
-        String word;
+        String str = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics.";
         StringBuffer sb = new StringBuffer();
+        String newstr = str.replace(",","").replace(".", "");
+        String[] strlist = newstr.split(" ");
 
         for(int i=0; i < strlist.length; i++){
-            if(i ==0 || i==4 || i==5 || i==6 || i==7 || i== 8 || i==14 ||
-                    i == 15 || i==18)
-            {
-                word = strlist[i];
-                sb.append(word.substring(0,1));
-            }
-            else{
-                word = strlist[i];
-                sb.append(word.substring(0,2));
-
-
-            }
+            sb.append(strlist[i].length());
         }
-
         System.out.println(sb.toString());
     }
+
 }
