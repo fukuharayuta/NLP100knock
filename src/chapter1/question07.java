@@ -1,5 +1,8 @@
 package chapter1;
 
+import java.text.Format;
+import java.text.MessageFormat;
+
 /**
  * Created by yuta on 2017/07/02.
  */
@@ -9,7 +12,18 @@ package chapter1;
  */
 public class question07 {
     public static void main(String[] args) {
-        StringBuffer sb = new StringBuffer("stressed");
-        System.out.println(sb.reverse());
+        String message;
+        String[] strlist = {"12","気温","22.4"};
+        message = sentenceFormat(strlist);
+        System.out.println(message);
+    }
+
+    public static String sentenceFormat(String[] strlist){
+        String message;
+        String str="{0}時の{1}は{2}";
+        Format sentenceformat= new MessageFormat(str);
+        message = sentenceformat.format(strlist);
+
+        return message;
     }
 }
