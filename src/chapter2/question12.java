@@ -14,7 +14,12 @@ public class question12 {
         String filepath = "res/hightemp.txt";
         String outfilepath1 = "res/col1.txt";
         String outfilepath2 = "res/col2.txt";
-       // System.out.println(count);
+
+        extractiontext(filepath,outfilepath1,outfilepath2);
+        // System.out.println(count);
+    }
+
+    public static void extractiontext(String filepath,String outfilepath1,String outfilepath2){
 
         try{
             FileReader fr = new FileReader(filepath);

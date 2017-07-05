@@ -12,7 +12,12 @@ import java.io.*;
 public class question11 {
     public static void main(String[] args) {
         String filepath = "res/hightemp.txt";
-        String outfilepath="res/hightemp2.txt";
+        String outfilepath = "res/hightemp2.txt";
+        changeline(filepath,outfilepath);
+
+    }
+
+    public static void changeline(String filepath,String outfilepath){
 
         try{
             FileReader fr = new FileReader(filepath);
