@@ -72,6 +72,7 @@ class Parameters implements Comparable<Parameters>{
     public double temperature(){
         return temperature;
     }
+
     @Override
     public int compareTo(Parameters p){
         if(this.temperature() >= p.temperature()){
