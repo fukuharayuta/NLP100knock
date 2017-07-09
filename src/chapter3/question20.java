@@ -1,7 +1,6 @@
 package chapter3;
 
 import com.oracle.javafx.jmx.json.JSONException;
-import com.oracle.javafx.jmx.json.JSONObject;
 
 import com.oracle.javafx.jmx.json.JSONFactory;
 import jdk.nashorn.internal.parser.JSONParser;
@@ -28,11 +27,11 @@ public class question20 {
     }
     public static void jsonparse(String json){
 
-        JSONFactory jsonFactory = new JSONFactory();
+        //JSONFactory jsonFactory = new JSONFactory();
 
         try {
-            JSONObject jsonObject = new JSONObject();
-            JSONArray jsonArary = new JSONArray();
+            //JSONObject jsonObject = new JSONObject();
+            //JSONArray jsonArary = new JSONArray();
 
         }catch (JSONException e){
             e.printStackTrace();
