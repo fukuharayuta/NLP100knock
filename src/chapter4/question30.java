@@ -35,16 +35,16 @@ public class question30 {
         ArrayList<Dictionary> arrayList = new ArrayList<>();
 
         try {
-            dic = new Dictionary();
+
             FileReader fr = new FileReader(filepath);
             BufferedReader br = new BufferedReader(fr);
             String line;
             line = br.readLine();
 
             while (line != null) {
-
                 if(! line.equals("EOS")){
 
+                    dic = new Dictionary();
                     line = line.replace("\t",",");
                     String[] linelist = line.split(",");
                     dic.surface = linelist[0];
@@ -52,11 +52,11 @@ public class question30 {
                     dic.pos = linelist[1];
                     dic.pos1 = linelist[2];
 
-                    System.out.println("表層形:" + dic.surface);
-                    System.out.println("基本形:" + dic.base);
-                    System.out.println("品詞:" + dic.pos);
-                    System.out.println("品詞細分:" + dic.pos1);
-                    System.out.println();
+//                    System.out.println("表層形:" + dic.surface);
+//                    System.out.println("基本形:" + dic.base);
+//                    System.out.println("品詞:" + dic.pos);
+//                    System.out.println("品詞細分:" + dic.pos1);
+//                    System.out.println();
 
                     arrayList.add(dic);
                     line = br.readLine();
@@ -112,7 +112,8 @@ public class question30 {
 
     public static void mecablink() {
         try {
-            File f = new File("/usr/local/lib/mecab-java/libMeCab.so");
+            String filepath = "/usr/local/lib/mecab-java/libMeCab.so";
+            File f = new File(filepath);
             System.load(f.toString());
             //System.loadLibrary("MeCab");
 
