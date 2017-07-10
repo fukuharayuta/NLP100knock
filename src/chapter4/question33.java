@@ -21,6 +21,7 @@ public class question33 {
         arrayList = q30.mecabreader(filepath);
         String pos;
         String pos1;
+
         for (int i = 0; i < arrayList.size(); i++) {
             pos = arrayList.get(i).pos;
             pos1 = arrayList.get(i).pos1;
