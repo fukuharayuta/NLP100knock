@@ -3,6 +3,7 @@ package chapter4;
 import org.chasen.mecab.MeCab;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import org.chasen.mecab.Tagger;
 import org.chasen.mecab.Model;
@@ -20,23 +21,48 @@ import org.chasen.mecab.Node;
 public class question30 {
     public static void main(String[] args) {
         String filepath = "res/neko.txt";
-        String outfilepath="res/neko.txt.mecab";
+        String outfilepath1="res/neko.txt.mecab";
+        String outfilepath2="res/neko2.txt.mecab";
         //mecabtextcreate(filepath,outfilepath);
-        mecabtest();
+        //mecabtest();
+        mecabreader(outfilepath2);
+        //filesplit(outfilepath1,outfilepath2);
     }
 
-    public static void mecabreader(String filepath) {
+    public static ArrayList<Dictionary> mecabreader(String filepath) {
+
+        Dictionary dic;
+        ArrayList<Dictionary> arrayList = new ArrayList<>();
 
         try {
+            dic = new Dictionary();
             FileReader fr = new FileReader(filepath);
             BufferedReader br = new BufferedReader(fr);
             String line;
             line = br.readLine();
 
             while (line != null) {
-                line = br.readLine();
 
+                if(! line.equals("EOS")){
+
+                    line = line.replace("\t",",");
+                    String[] linelist = line.split(",");
+                    dic.surface = linelist[0];
+                    dic.base = linelist[7];
+                    dic.pos = linelist[1];
+                    dic.pos1 = linelist[2];
+
+                    System.out.println("表層形:" + dic.surface);
+                    System.out.println("基本形:" + dic.base);
+                    System.out.println("品詞:" + dic.pos);
+                    System.out.println("品詞細分:" + dic.pos1);
+                    System.out.println();
+
+                    arrayList.add(dic);
+                    line = br.readLine();
+                }
             }
+
             br.close();
 
             }catch(FileNotFoundException e){
@@ -46,8 +72,43 @@ public class question30 {
                 System.out.println(e);
             }
 
+        return arrayList;
     }
+    public static void filesplit(String filepath,String outfilepath){
 
+        int counter=0;
+
+        try {
+
+            FileReader fr = new FileReader(filepath);
+            BufferedReader br = new BufferedReader(fr);
+            File file = new File(outfilepath);
+            file.createNewFile();
+            PrintWriter pw = new PrintWriter(file);
+            String line;
+            line = br.readLine();
+
+            while (line != null) {
+                if(counter < 10000){
+                    counter++;
+                    pw.println(line);
+
+                }else {
+                    break;
+                }
+                line = br.readLine();
+            }
+            pw.close();
+            br.close();
+
+        }catch(FileNotFoundException e){
+            System.out.println(e);
+
+        }catch(IOException e){
+            System.out.println(e);
+        }
+
+    }
 
     public static void mecablink() {
         try {
@@ -138,4 +199,12 @@ public class question30 {
             }
         }
     }
+}
+
+class Dictionary{
+    String surface;
+    String base;
+    String pos;
+    String pos1;
+
 }
