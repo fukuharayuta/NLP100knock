@@ -1,14 +1,17 @@
 package chapter3;
 
-import com.oracle.javafx.jmx.json.JSONException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.javafx.tools.ant.Info;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import com.oracle.javafx.jmx.json.JSONFactory;
-import jdk.nashorn.internal.parser.JSONParser;
+import java.io.*;
+import java.util.List;
+import java.util.Map;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import org.json.JSONException;
+
 
 /**
  * Created by yuta on 2017/07/07.
@@ -20,39 +23,42 @@ Wikipedia記事のJSONファイルを読み込み，「イギリス」に関す�
 public class question20 {
     public static void main(String[] args) {
         String filepath = "res/jawiki-country.json";
-        String json;
-        json = fileread(filepath);
-       // System.out.println(json);
+        String outfilepath="res/jawiki-uk.json";
+        String regex="イギリス";
+
+
+        jsoncountrysearch(filepath,outfilepath,regex);
+
 
     }
-    public static void jsonparse(String json){
 
-        //JSONFactory jsonFactory = new JSONFactory();
 
-        try {
-            //JSONObject jsonObject = new JSONObject();
-            //JSONArray jsonArary = new JSONArray();
-
-        }catch (JSONException e){
-            e.printStackTrace();
-        }
-    }
-
-    public static String fileread(String filepath){
-        String json ="";
+    public static void jsoncountrysearch(String filepath,String outfilepath,String regex){
+        ObjectMapper mapper = new ObjectMapper();
 
         try{
             FileReader fr = new FileReader(filepath);
             BufferedReader br = new BufferedReader(fr);
-            String line;
+            File file = new File(outfilepath);
+            file.createNewFile();
+            PrintWriter pw = new PrintWriter(file);
 
+            String line;
             line = br.readLine();
 
             while(line != null){
-                json = json + line;
+                JsonNode root = mapper.readTree(line);
+
+                if(root.get("title").asText().equals(regex)){
+
+                    System.out.println(root.get("text").asText());
+                    pw.println(line);
+
+                }
                 line = br.readLine();
             }
             br.close();
+            pw.close();
 
 
         }catch (FileNotFoundException e){
@@ -61,6 +67,5 @@ public class question20 {
         }catch (IOException e){
             System.out.println(e);
         }
-        return json;
     }
 }
