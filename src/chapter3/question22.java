@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class question22 {
     public static void main(String[] args) {
         String filepath = "res/jawiki-uk.json";
-        String regex ="(.+Category:.+)";
+        String regex =".*\\[\\[Category:(.*?)(?:\\|.*)?\\]\\].*";
         jsoncategorynamesearch(filepath,regex);
     }
     public static void jsoncategorynamesearch(String filepath,String regex){
@@ -30,7 +30,7 @@ public class question22 {
             JsonNode root = mapper.readTree(new File(filepath));
             matcher = p.matcher(root.get("text").asText());
             while (matcher.find()){
-                System.out.println(matcher.group());
+                System.out.println(matcher.group(1));
             }
 
 

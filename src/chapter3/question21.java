@@ -19,7 +19,7 @@ public class question21 {
     public static void main(String[] args) {
 
         String filepath = "res/jawiki-uk.json";
-        String regex ="(.+Category:.+)";
+        String regex ="(.*\\[\\[Category:.*\\]\\].*)";
         jsoncategorysearch(filepath,regex);
     }
 
