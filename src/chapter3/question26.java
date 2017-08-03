@@ -1,5 +1,8 @@
 package chapter3;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by yuta on 2017/07/07.
  */
@@ -10,6 +13,20 @@ package chapter3;
  */
 public class question26 {
     public static void main(String[] args) {
-        String filepath = "res/hightemp.txt";
+
+        Map<String,String> dictionary = new HashMap<>();
+        String filepath = "res/jawiki-uk.json";
+        String regex ="\\{\\{基礎情報.*([\\s\\S]*?)\\}\\}\\n";
+        String regexdata="\\|(.*?)\\s*(=)\\s*(.*?)(?:(?=\\n\\|)|(?=\\n))";
+        String markupregex = "'''";
+        dictionary = question25.templatesearch(filepath,regex,regexdata);
+
+
+    }
+    public static void markupdelete(Map<String,String> dictionary,String markupregex){
+
+        for(Map.Entry<String,String> entry: dictionary.entrySet()){
+
+        }
     }
 }
