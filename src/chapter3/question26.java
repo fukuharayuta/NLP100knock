@@ -2,6 +2,8 @@ package chapter3;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by yuta on 2017/07/07.
@@ -20,13 +22,27 @@ public class question26 {
         String regexdata="\\|(.*?)\\s*(=)\\s*(.*?)(?:(?=\\n\\|)|(?=\\n))";
         String markupregex = "'''";
         dictionary = question25.templatesearch(filepath,regex,regexdata);
+        dictionary = markupdelete(dictionary);
+
+        for(Map.Entry<String,String> entry: dictionary.entrySet()){
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+        }
+
 
 
     }
-    public static void markupdelete(Map<String,String> dictionary,String markupregex){
+    public static Map<String,String> markupdelete(Map<String,String> dictionary){
+        String regex = "(''')";
+        Pattern p = Pattern.compile(regex);
+        Matcher matcher;
 
         for(Map.Entry<String,String> entry: dictionary.entrySet()){
-
+            matcher = p.matcher(entry.getValue());
+            while (matcher.find()){
+                String result = matcher.replaceAll("");
+                dictionary.put(entry.getKey(),result);
+            }
         }
+        return dictionary;
     }
 }
